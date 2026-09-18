@@ -51,7 +51,7 @@
                 and the met station as an orange dot on Top Burrows.
                 <ul class="mt-5">
                     <li class="mt-4 h-12 content-center"><span
-                            class="m-2 h-8 w-8 rounded-full bg-red-500 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-nw-blue-50">
+                            class="m-2 h-8 w-8 rounded-full bg-red-600 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-nw-blue-50">
 
                         </span>Arable</li>
                     <li class="mt-4 h-12 content-center"><span
@@ -59,7 +59,7 @@
 
                         </span>Permanent Pasture</li>
                     <li class="mt-4 h-12 content-center"><span
-                            class="m-2 h-8 w-8 rounded-full bg-blue-400 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-nw-blue-50">
+                            class="m-2 h-8 w-8 rounded-full bg-nw-blue-600 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-nw-blue-50">
 
                         </span>Grass Clover Mixture</li>
 
