@@ -1,0 +1,157 @@
+@import 'tailwindcss';
+
+@source '../views';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+
+@theme {
+  --list-style-type-*: initial;
+  --list-style-type-none: none;
+  --list-style-type-disc: disc;
+  --list-style-type-decimal: decimal;
+  --list-style-type-square: square;
+  --list-style-type-roman: upper-roman;
+
+  --color-*: initial;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+  --color-black: #000;
+  --color-white: #fff;
+
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+  --color-gray-950: #030712;
+
+  --color-amber-50: #fffbeb;
+  --color-amber-100: #fef3c7;
+  --color-amber-200: #fde68a;
+  --color-amber-300: #fcd34d;
+  --color-amber-400: #fbbf24;
+  --color-amber-500: #f59e0b;
+  --color-amber-600: #d97706;
+  --color-amber-700: #b45309;
+  --color-amber-800: #92400e;
+  --color-amber-900: #78350f;
+  --color-amber-950: #451a03;
+
+  --color-lime-50: #f7fee7;
+  --color-lime-100: #ecfccb;
+  --color-lime-200: #d9f99d;
+  --color-lime-300: #bef264;
+  --color-lime-400: #a3e635;
+  --color-lime-500: #84cc16;
+  --color-lime-600: #65a30d;
+  --color-lime-700: #4d7c0f;
+  --color-lime-800: #3f6212;
+  --color-lime-900: #365314;
+  --color-lime-950: #1a2e05;
+
+  --color-orange-50: #fff7ed;
+  --color-orange-100: #ffedd5;
+  --color-orange-200: #fed7aa;
+  --color-orange-300: #fdba74;
+  --color-orange-400: #fb923c;
+  --color-orange-500: #f97316;
+  --color-orange-600: #ea580c;
+  --color-orange-700: #c2410c;
+  --color-orange-800: #9a3412;
+  --color-orange-900: #7c2d12;
+  --color-orange-950: #431407;
+
+  --color-yellow-50: #fefce8;
+  --color-yellow-100: #fef9c3;
+  --color-yellow-200: #fef08a;
+  --color-yellow-300: #fde047;
+  --color-yellow-400: #facc15;
+  --color-yellow-500: #eab308;
+  --color-yellow-600: #ca8a04;
+  --color-yellow-700: #a16207;
+  --color-yellow-800: #854d0e;
+  --color-yellow-900: #713f12;
+  --color-yellow-950: #422006;
+
+  --color-nw-blue-50: #ebfffe;
+  --color-nw-blue-100: #cdfeff;
+  --color-nw-blue-200: #a1faff;
+  --color-nw-blue-300: #60f4ff;
+  --color-nw-blue-400: #18e4f8;
+  --color-nw-blue-500: #00c6de;
+  --color-nw-blue-600: #0097b2;
+  --color-nw-blue-700: #087d96;
+  --color-nw-blue-800: #10647a;
+  --color-nw-blue-900: #125467;
+  --color-nw-blue-950: #053747;
+
+  --font-sans:
+    Figtree, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+  --background-image-bg01: url('/public/images/herbage.jpg');
+  --background-image-bg02: url('/public/images/bg02.jpg');
+  --background-image-bg02muted: url('/public/images/bg02-muted.jpg');
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+@utility masonry {
+  @layer utilities {
+    column-gap: 1.5em;
+    column-count: 1;
+  }
+}
+
+@utility masonry-sm {
+  @layer utilities {
+    column-gap: 1.5em;
+    column-count: 2;
+  }
+}
+
+@utility masonry-md {
+  @layer utilities {
+    column-gap: 1.5em;
+    column-count: 3;
+  }
+}
+
+@utility break-inside {
+  @layer utilities {
+    break-inside: avoid;
+  }
+}
+
+@layer utilities {
+  [x-cloak] {
+    display: none;
+  }
+
+  h2.basics {
+    color: nw-blue-50;
+    background-color: nw-blue-700;
+    font-size: 1.5 em;
+  }
+}
