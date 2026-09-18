@@ -12,6 +12,7 @@
 /storage/*.key
 /storage/pail
 /vendor
+.about.*
 .env
 .env.*
 .env.backup
