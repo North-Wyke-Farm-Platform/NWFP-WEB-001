@@ -49,25 +49,30 @@
     @endif
     @if ($hasButtons != "NO")
     <div class="border-t-4 border-nw-blue-700 p-3">
-        @foreach ($types as $typeID => $type)
-            <x-button-link href="#{{ $typeID }}">{{ $type }}</x-button-link>
+        @foreach ($ref_types->all() as $ref_type)
+            @php
+                $abType = explode(' ', trim($ref_type->ref_type))[0];
+            @endphp
+            <x-button-link href="#{{ $abType }}">{{ $ref_type->ref_type }}</x-button-link>
         @endforeach
     </div>
     @endif
-    @foreach ($types as $typeID => $type)
+    @foreach ($ref_types->all() as $ref_type)
         @php
             // this removes the empty ref TYpes headers $j is the number of items that year
             $j = 0;
 
+            $abType = explode(' ', trim($ref_type->ref_type))[0];
+
             foreach ($publications as $pub) {
-                if (strpos($pub->ref_type, $type) !== false) {
+                if (strpos($pub->ref_type, $abType) !== false) {
                     $j = $j + 1;
                 }
             }
         @endphp
         @if ($j > 0)
             <h2 class="py-auto mt-4 h-8 bg-nw-blue-700 px-4 text-lg font-medium text-nw-blue-50"
-                id="{{ $typeID }}">{{ $type }}</h2>
+                id="{{ $abType }}">{{ $ref_type->ref_type }}</h2>
         @endif
         @foreach ($years as $year)
             @php
@@ -75,7 +80,7 @@
                 $i = 0;
 
                 foreach ($publications as $pub) {
-                    if (strpos($pub->ref_type, $type) !== false && $pub->pub_year == $year->pub_year) {
+                    if (strpos($pub->ref_type, $abType) !== false && $pub->pub_year == $year->pub_year) {
                         $i = $i + 1;
                     }
                 }
@@ -85,7 +90,7 @@
                 <ul class="space-y-3 p-3">
 
                     @foreach ($publications as $pub)
-                        @if (strpos($pub->ref_type, $type) !== false && $pub->pub_year == $year->pub_year)
+                        @if (strpos($pub->ref_type, $abType) !== false && $pub->pub_year == $year->pub_year)
                             <li class="list-inside list-disc">
 
                                 {{ $pub->authors }} ({{ $pub->pub_year }})

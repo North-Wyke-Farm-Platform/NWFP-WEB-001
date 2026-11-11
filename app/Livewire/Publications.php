@@ -29,6 +29,11 @@ class Publications extends Component
         'rf7'=>'Computer Program',
         'rf9'=>'RPubs',
         'rf10'  =>'Book', // because we will look for 'Book' in the ref_type, the smaller of Book or Book Chapter, we will use the ref_type to filter for books and book chapters
+        'rf11'  =>'Book Chapter',
+        'rf12'  =>'Thesis',
+        'rf13'  =>'Web Page',
+        'rf14'  =>'Student Project',
+        'rf16'  =>'Protocol',
     ];
     public Collection $ref_types;
 
@@ -59,7 +64,6 @@ class Publications extends Component
         $this-> data=  [
             'publications' => $this->publications,
             'years' => $this->years,
-            'types' => $this->types,
             'ref_types' => $this->ref_types,
             'hasButton' => $this->hasButtons,
             'hasSearch' => $this->hasSearch,
