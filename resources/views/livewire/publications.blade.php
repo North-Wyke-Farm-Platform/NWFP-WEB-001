@@ -49,30 +49,40 @@
     @endif
     @if ($hasButtons != "NO")
     <div class="border-t-4 border-nw-blue-700 p-3">
-        @foreach ($ref_types->all() as $ref_type)
-            @php
-                $abType = explode(' ', trim($ref_type->ref_type))[0];
-            @endphp
-            <x-button-link href="#{{ $abType }}">{{ $ref_type->ref_type }}</x-button-link>
+        @php
+            // dd($types);
+        @endphp
+        @foreach ($types as $type)
+
+            <x-button-link href="#{{ $type }}">{{ $type }}</x-button-link>
         @endforeach
     </div>
     @endif
-    @foreach ($ref_types->all() as $ref_type)
+    @foreach ($types as $type)
         @php
-            // this removes the empty ref TYpes headers $j is the number of items that year
+            // this removes the empty ref Types headers $j is the number of items that year
             $j = 0;
 
-            $abType = explode(' ', trim($ref_type->ref_type))[0];
-
+            $abType = explode(' ', trim($type))[0];
+            $ref_type_title = ""; // reset the ref_type_title for each type
             foreach ($publications as $pub) {
                 if (strpos($pub->ref_type, $abType) !== false) {
                     $j = $j + 1;
+                    if ($ref_type_title == "") { // the first time we find a ref_type for this type, we set the title to that ref_type
+                        $ref_type_title = $pub->ref_type;
+                    } else {
+                        // if the ref_type not already in the ref_type_title, we add it.
+                        if (strpos( strtolower($ref_type_title), strtolower($pub->ref_type)) === false) {
+                            $ref_type_title .= " or " . $pub->ref_type;
+                        }
+                    }
+
                 }
             }
         @endphp
         @if ($j > 0)
-            <h2 class="py-auto mt-4 h-8 bg-nw-blue-700 px-4 text-lg font-medium text-nw-blue-50"
-                id="{{ $abType }}">{{ $ref_type->ref_type }}</h2>
+            <a name="{{ $abType }}"></a>
+            <h2 class="py-auto mt-4 h-8 bg-nw-blue-700 px-4 text-lg font-medium text-nw-blue-50">{{ $ref_type_title }}</h2>
         @endif
         @foreach ($years as $year)
             @php

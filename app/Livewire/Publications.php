@@ -5,7 +5,9 @@ namespace App\Livewire;
 use Illuminate\Support\Collection;
 use Livewire\Component;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\DB;
 use App\Models\Publication;
+
 
 class Publications extends Component
 {
@@ -21,20 +23,7 @@ class Publications extends Component
     public $guides = 1;
     public Collection $years;
     public Collection $publications;
-    public $types= [
-        'rf1'=>'Journal Article',
-        'rf2'=>'Conference',
-        'rf4'=>'Dataset',
-        'rf5'=>'Report',
-        'rf7'=>'Computer Program',
-        'rf9'=>'RPubs',
-        'rf10'  =>'Book', // because we will look for 'Book' in the ref_type, the smaller of Book or Book Chapter, we will use the ref_type to filter for books and book chapters
-        'rf11'  =>'Book Chapter',
-        'rf12'  =>'Thesis',
-        'rf13'  =>'Web Page',
-        'rf14'  =>'Student Project',
-        'rf16'  =>'Protocol',
-    ];
+    public Array  $types = array();
     public Collection $ref_types;
 
     public array$data = array();
@@ -43,6 +32,14 @@ class Publications extends Component
 
 
     public function mount() {
+        // we what the types to be short and unique, so we will explode the string and take the first word of each type
+
+
+       $this->types = Publication::pluck('ref_type')
+        ->map(fn ($refType) => explode(' ', $refType)[0])
+        ->unique()
+        ->sort()
+        ->toArray();
 
 
     }
@@ -56,7 +53,7 @@ class Publications extends Component
         ->orderBy('authors')
         ->get();
         $this -> years = Publication::select('pub_year')->distinct('pub_year')->orderBy('pub_year', 'DESC')->get();
-        $this -> ref_types = Publication::select('ref_type')->distinct('ref_type')->orderBy('ref_type', 'ASC')->get();
+
         $this-> view = 'livewire.publications';
         if ($this->keyref == 'KeyRefUserGuide') {
             $this->view = 'livewire.publications.nw_guides';
@@ -64,7 +61,7 @@ class Publications extends Component
         $this-> data=  [
             'publications' => $this->publications,
             'years' => $this->years,
-            'ref_types' => $this->ref_types,
+            'types' => $this->types,
             'hasButton' => $this->hasButtons,
             'hasSearch' => $this->hasSearch,
 
