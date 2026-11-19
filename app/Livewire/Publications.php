@@ -2,7 +2,8 @@
 
 namespace App\Livewire;
 
-use Illuminate\Support\Collection;
+
+use Illuminate\Database\Eloquent\Collection;
 use Livewire\Component;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
